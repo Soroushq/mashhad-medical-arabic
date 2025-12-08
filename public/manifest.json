@@ -1,0 +1,26 @@
+{
+  "name": "دليل مشهد الطبي",
+  "short_name": "مشهد الطبي",
+  "description": "ابحث عن أفضل الأطباء في مشهد مع خدمات ترجمة احترافية",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0284c7",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "/mmg.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/mmg.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
