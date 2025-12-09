@@ -6,6 +6,7 @@ import { LikeButton } from "@/components/LikeButton";
 import { checkIfLiked } from "@/actions/likes";
 import { submitReview } from "@/actions/public-reviews";
 import { Suspense } from "react";
+import { StarRating } from "@/components/StarRating";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -261,28 +262,7 @@ export default async function DoctorDetailPage({ params, searchParams }: Props) 
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
-                التقييم *
-              </label>
-              <div className="flex gap-2">
-                {[5, 4, 3, 2, 1].map((star) => (
-                  <label key={star} className="flex-1">
-                    <input
-                      type="radio"
-                      name="rating"
-                      value={star}
-                      required
-                      className="peer hidden"
-                    />
-                    <div className="cursor-pointer bg-white border-2 border-gray-200 rounded-xl p-3 text-center hover:border-gold-400 peer-checked:bg-gold-500 peer-checked:border-gold-500 peer-checked:text-white transition">
-                      <div className="text-2xl mb-1">{'⭐'.repeat(star)}</div>
-                      <div className="text-xs font-medium">{star}</div>
-                    </div>
-                  </label>
-                ))}
-              </div>
-            </div>
+            <StarRating />
 
             <div>
               <label className="block text-sm font-semibold text-gray-900 mb-2">

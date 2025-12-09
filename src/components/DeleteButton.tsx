@@ -1,28 +1,40 @@
 // File: src/components/DeleteButton.tsx
 'use client';
 
+import { useState } from 'react';
+
 interface DeleteButtonProps {
-  action: () => void;
-  message: string;
+  message?: string;
   className?: string;
-  children: React.ReactNode;
+  title?: string;
+  children?: React.ReactNode;
 }
 
-export function DeleteButton({ action, message, className, children }: DeleteButtonProps) {
-  const handleClick = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (confirm(message)) {
-      action();
+export function DeleteButton({
+  message = 'هل أنت متأكد من الحذف؟',
+  className,
+  title,
+  children,
+}: DeleteButtonProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!confirm(message)) {
+      e.preventDefault();
+      return;
     }
+    setIsSubmitting(true);
   };
 
   return (
     <button
-      type="button"
+      type="submit"
       onClick={handleClick}
       className={className}
+      title={title}
+      disabled={isSubmitting}
     >
-      {children}
+      {isSubmitting ? '...' : children}
     </button>
   );
 }

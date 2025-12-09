@@ -79,18 +79,18 @@ export default async function ReviewsPage({
                       </button>
                     </form>
                   )}
-                  {canUserDelete && (
-                    <form action={deleteReview}>
-                      <input type="hidden" name="id" value={review.id} />
-                      <DeleteButton
-                        action={() => {}}
-                        message="هل أنت متأكد من حذف هذا التقييم؟"
-                        className="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition text-sm font-medium"
-                      >
-                        🗑️ حذف
-                      </DeleteButton>
-                    </form>
-                  )}
+                {canUserDelete && (
+                  <form action={deleteReview}>
+                    <input type="hidden" name="id" value={review.id} />
+                    <DeleteButton
+                      message="هل أنت متأكد من حذف هذا التقييم؟"
+                      className="px-4 py-2 bg-red-600 text-white rounded-xl hover:bg-red-700 transition text-sm font-medium"
+                      title="حذف"
+                    >
+                      🗑️ حذف
+                    </DeleteButton>
+                  </form>
+                )}
                 </div>
               </div>
               {review.comment && (

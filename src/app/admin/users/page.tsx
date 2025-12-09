@@ -105,9 +105,9 @@ export default async function UsersPage({
                             <form action={deleteUser}>
                               <input type="hidden" name="id" value={user.id} />
                               <DeleteButton
-                                action={() => {}}
                                 message="هل أنت متأكد من حذف هذا المستخدم؟"
                                 className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+                                title="حذف"
                               >
                                 🗑️
                               </DeleteButton>
