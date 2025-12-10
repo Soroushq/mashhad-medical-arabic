@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 import { PublicNav } from "@/components/PublicNav";
+import "@/styles/nav.css";
 
 const noto = Noto_Kufi_Arabic({ 
   subsets: ["arabic"],
