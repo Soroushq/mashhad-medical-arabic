@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:attractions": "tsx prisma/seed-attractions.ts"
+
   },
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.1.0",
@@ -29,6 +31,7 @@
     "eslint-config-next": "16.0.7",
     "prisma": "^7.1.0",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

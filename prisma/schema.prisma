@@ -107,3 +107,97 @@ model Analytics {
 
   @@unique([date])
 }
+
+// Tourist Attractions Feature
+enum PriceRange {
+  FREE          // مجاني
+  BUDGET        // اقتصادي
+  MODERATE      // متوسط
+  EXPENSIVE     // مرتفع
+  VERY_EXPENSIVE // مرتفع جداً
+}
+
+model AttractionCategory {
+  id          Int          @id @default(autoincrement())
+  nameAr      String
+  nameEn      String?
+  icon        String
+  slug        String       @unique
+  isActive    Boolean      @default(false) // Admin activates categories
+  
+  // SEO Fields
+  seoTitle       String?
+  seoDescription String?    @db.Text
+  seoKeywords    String?
+  
+  attractions Attraction[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Attraction {
+  id             Int                @id @default(autoincrement())
+  nameAr         String
+  nameEn         String?
+  descriptionAr  String             @db.Text
+  descriptionEn  String?            @db.Text
+  
+  // Category
+  categoryId     Int
+  category       AttractionCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  // Contact & Location
+  address        String
+  phone          String?
+  whatsapp       String?
+  website        String?
+  mapLink        String?            // Google Maps share link
+  mapImageUrl    String?            // Screenshot of map location
+  
+  // Media - Multiple images stored as JSON array
+  images         String             @default("[]") @db.Text // ["url1", "url2", "url3"]
+  
+  // Pricing & Time
+  priceRange     PriceRange?
+  openingHours   String?
+  
+  // Engagement
+  rating         Float              @default(0)
+  likesCount     Int                @default(0)
+  viewsCount     Int                @default(0)
+  isActive       Boolean            @default(true)
+  isFeatured     Boolean            @default(false)
+  
+  // SEO Fields
+  seoTitle       String?
+  seoDescription String?            @db.Text
+  seoKeywords    String?
+  slug           String             @unique
+  
+  reviews        AttractionReview[]
+  likes          AttractionLike[]
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+}
+
+model AttractionReview {
+  id           Int        @id @default(autoincrement())
+  attractionId Int
+  attraction   Attraction @relation(fields: [attractionId], references: [id], onDelete: Cascade)
+  userName     String
+  userEmail    String?
+  rating       Int        // 1-5
+  comment      String?    @db.Text
+  isApproved   Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+}
+
+model AttractionLike {
+  id           Int        @id @default(autoincrement())
+  attractionId Int
+  attraction   Attraction @relation(fields: [attractionId], references: [id], onDelete: Cascade)
+  ipAddress    String
+  createdAt    DateTime   @default(now())
+
+  @@unique([attractionId, ipAddress])
+}
